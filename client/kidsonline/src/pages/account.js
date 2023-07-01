@@ -6,7 +6,7 @@ function Account() {
       <NavBar />
         <login/>
       <div className="container mt-4">
-        <h1>Account</h1>
+        <h1>Page under construction</h1>
       </div>
     </div>
     )

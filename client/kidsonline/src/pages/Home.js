@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../ResponsePage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './NavBar';
+import AceEditor from 'react-ace';
+
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/theme-monokai';
 
 
 function Home() {
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
+  const [codeExecuted, setCodeExecuted] = useState(false);
 
-  const handleCodeChange = (event) => {
-    setCode(event.target.value);
+  const handleCodeChange = (newCode) => {
+    setCode(newCode);
+
   };
+  
 
   const handleRunCode = async () => {
     console.log('Running code:', code);
 
     try {
-      const response = await fetch('http://127.0.0.1:34000/execute', {
+      const response = await fetch('http://127.0.0.1:5000/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,12 +38,14 @@ function Home() {
         if (result.error) {
           setOutput('Error:\n' + result.error);
         } else {
+          setCodeExecuted(true); // Set code execution flag to true even if an error occurs
           setOutput(result.output);
         }
       } else {
         console.error('Code execution failed');
         setOutput('Code execution failed');
       }
+      
     } catch (error) {
       console.error('An error occurred while executing the code:', error);
       setOutput('An error occurred while executing the code');
@@ -62,37 +71,51 @@ function Home() {
   }, [code]); // Include code as a dependency in the useEffect hook
 
   return (
-<div>
-    {/* Navigation bar */}
-    <NavBar />
-
-    <div className="container">
-
-      {/* Content */}
-      <div className="content">
-        <h1>Python Playground</h1>
-        {/* Code input text area */}
-        <textarea
-          rows={10}
-          className="code-input"
-          value={code}
-          onChange={handleCodeChange}
-          placeholder="Write your Python code here"
-        />
-        <br />
-        {/* Run code button */}
-        <button className="run-button" onClick={handleRunCode}>
-          Run Code
-        </button>
-        {/* Output box */}
-        <div className="output-box">
-          <h2>Output:</h2>
-          <pre>{output}</pre>
+    <div>
+      {/* Navigation bar */}
+      <NavBar />
+  
+      <div className="container">
+  
+        {/* Content */}
+        <div className="container mt-4">
+          <h1>Python Playground</h1>
+          {/* Code input text area */}
+          <AceEditor
+            mode="python"
+            theme="monokai"
+            fontSize={16}
+            value={code}
+            onChange={handleCodeChange}
+            placeholder="Write your Python code here"
+            style={{
+              width: '100%',
+              height: '670px',
+              borderRadius: '10px',
+              padding: '20px',
+            }}
+            showPrintMargin={false}
+          />
+  
+          <br />
+          {/* Run code button */}
+          <button className="run-button" onClick={handleRunCode}>
+          ▶️
+          </button>
+  
+          {/* Output box */}
+          <div className="terminal">
+            <div className="terminal-body" style={{borderRadius: '10px',}}>
+            <pre>
+                {output} {codeExecuted ? null : 'Press Control-Enter to run the code above'}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   );
+  
 }
 
 export default Home;
