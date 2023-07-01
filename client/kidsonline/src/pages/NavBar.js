@@ -16,10 +16,15 @@ function NavBar() {
           <Nav.Link href="/exercise" className="custom-nav-link">
             Exercise
           </Nav.Link>
-          <Nav.Link href="/AboutUs" className="custom-nav-link">
+          <Nav.Link href="/aboutUs" className="custom-nav-link">
             About us
           </Nav.Link>
         </Nav>
+        <Nav>
+            <Nav.Link href="/account" className='custom-nav-link'>
+              Account
+            </Nav.Link>
+          </Nav>
       </Container>
     </Navbar>
   );

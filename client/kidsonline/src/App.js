@@ -1,7 +1,8 @@
 import React from 'react';
-import Exercise from './pages/Exercise';
-import Home from './pages/Home';
-import AboutUs from "./pages/AboutUs";
+import Exercise from './pages/exercise';
+import Home from './pages/home';
+import Account from './pages/account';
+import AboutUs from "./pages/aboutUs";
 function App() {
   const currentPath = window.location.pathname;
 
@@ -9,7 +10,8 @@ function App() {
     <div className="App">
       {currentPath === '/' && <Home />}
       {currentPath === '/exercise' && <Exercise />}
-      {currentPath === '/AboutUs' && <AboutUs />}
+      {currentPath === '/account' && <Account />}
+      {currentPath === '/aboutUs' && <AboutUs />}
 
     </div>
   );
