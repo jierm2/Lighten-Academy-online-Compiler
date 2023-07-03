@@ -2,6 +2,8 @@ import React from 'react';
 import Exercise from './pages/exercise';
 import Home from './pages/home';
 import Account from './pages/account';
+import Signup from './pages/signup';
+import A001 from './pages/excercise/a001';
 import AboutUs from "./pages/aboutUs";
 function App() {
   const currentPath = window.location.pathname;
@@ -12,6 +14,9 @@ function App() {
       {currentPath === '/exercise' && <Exercise />}
       {currentPath === '/account' && <Account />}
       {currentPath === '/aboutUs' && <AboutUs />}
+      {currentPath === '/signup' && <Signup />}
+
+      {currentPath === '/a001' && <A001 />}
 
     </div>
   );
