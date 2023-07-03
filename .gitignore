@@ -1,0 +1,33 @@
+# Ignore the node_modules directory
+client/node_modules/
+
+
+# Ignore the PnP files (used by Yarn)
+client/.pnp
+client/.pnp.js
+
+
+# Ignore the coverage directory (used for testing)
+client/coverage
+
+
+# Ignore the build directory (used for production builds)
+client/build
+
+
+# Ignore miscellaneous files
+client/.DS_Store
+client/.env.local
+client/.env.development.local
+client/.env.test.local
+client/.env.production.local
+
+
+# Ignore log files
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+
+
+server/__pycache__
+
