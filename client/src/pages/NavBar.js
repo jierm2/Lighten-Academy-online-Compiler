@@ -1,8 +1,35 @@
-import React from 'react';
-import { Navbar, Container } from 'react-bootstrap';
+import React, { useContext, useState, useEffect } from 'react';
+import { Navbar, Container, Spinner } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
+import { UserContext } from '../context/Usercontext.js';
 
 function NavBar() {
+  const user = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Navbar bg="dark">
+        <Container fluid>
+          <Navbar.Brand href="" className="custom-navbar-brand">
+            Lighten Academy
+          </Navbar.Brand>
+          <Spinner animation="border" variant="light" className="mr-2" />
+        </Container>
+      </Navbar>
+    );
+  }
+
   return (
     <Navbar bg="dark">
       <Container fluid>
@@ -21,10 +48,16 @@ function NavBar() {
           </Nav.Link>
         </Nav>
         <Nav>
-            <Nav.Link href="/account" className='custom-nav-link'>
+          {user && user.emailVerified ? (
+            <Nav.Link href="/account" className="custom-nav-link">
               Account
             </Nav.Link>
-          </Nav>
+          ) : (
+            <Nav.Link href="/login" className="custom-nav-link">
+              Log in
+            </Nav.Link>
+          )}
+        </Nav>
       </Container>
     </Navbar>
   );

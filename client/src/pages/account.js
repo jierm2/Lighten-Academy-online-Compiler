@@ -1,101 +1,187 @@
-import '../App.css';
+import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
-import React, { useState } from 'react';
-import GoogleButton from 'react-google-button'
 import Button from 'react-bootstrap/Button';
-import {auth,googleProvider} from '../config/firebase';
-import {createUserWithEmailAndPassword,signInWithPopup,signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import { auth, db } from '../config/firebase';
+import { getDocs, collection, query, where, getDoc, updateDoc } from 'firebase/firestore';
+import Confetti from 'react-confetti';
+import {onSnapshot } from 'firebase/firestore';
+
 import {
-  MDBContainer,
   MDBCol,
+  MDBContainer,
   MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
   MDBBtn,
-  MDBInput,
-  MDBCheckbox
-}
-from 'mdb-react-ui-kit';
-import { async } from '@firebase/util';
+  MDBProgress,
+  MDBProgressBar,
+} from 'mdb-react-ui-kit';
 
 function Account() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [progressData, setProgressData] = useState({});
 
-    const signIn = async () => {
-  try {
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-    if (credential && credential.user) {
-      if (!credential.user.emailVerified) {
-        alert('Please verify your email first');
-        signOut(auth); // sign out the user immediately
-      } else {
-        // Navigate to profile page
-        // history.push("/profile");
+  const fetchProgressData = () => {
+    try {
+      const userId = auth.currentUser?.uid;
+      if (userId) {
+        const q = query(collection(db, 'Progress'), where('userID', '==', userId));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const completionStatus = {};
+          snapshot.docs.forEach((doc) => {
+            const data = doc.data();
+            const taskId = data.taskID.taskID;
+            const isCompleted = data.completed;
+            completionStatus[taskId] = isCompleted;
+          });
+          setProgressData(completionStatus);
+        });
+        return unsubscribe;
       }
+    } catch (error) {
+      console.error('Error fetching progress data:', error);
     }
-  } catch (err) {
-    alert(err.message);
-  }
-}
+  };
+  
+  console.log('progress',progressData)
 
-    console.log(auth?.currentUser?.photoURL);
-    const signInwithGoogle = async () => {
-        console.log('button clicked');
-        try {
-            await signInWithPopup (auth, googleProvider);
-        } catch (err) {
-            alert(err.message);
-        }
-    }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserEmail(user.email);
+        setUserName(user.displayName);
+        const unsubscribeProgress = fetchProgressData();
+        return () => {
+          unsubscribeProgress();
+        };
+      }
+    });
+  
+    return () => unsubscribe();
+  }, []);
+  
 
-    const logOut = async () => {
-        console.log('button clicked');
-        try {
-            await signOut(auth);
-        } catch (err) {
-            alert(err.message);
-        }
+  const logOut = async () => {
+    console.log('button clicked');
+    try {
+      await auth.signOut();
+    } catch (err) {
+      alert(err.message);
     }
+  };
+
   return (
-    <div>
-    <NavBar />
-      {/* <login/> */}
+    <section style={{ backgroundColor: '#eee' }}>
+      <NavBar />
 
-    <MDBContainer fluid className="p-3 my-5">
+      <MDBContainer className="py-5">
+        <MDBRow>
+          <MDBCol lg="4">
+            <MDBCard className="mb-4">
+              <MDBCardBody className="text-center">
+                <MDBCardImage
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                  alt="avatar"
+                  className="rounded-circle"
+                  style={{ width: '150px' }}
+                  fluid
+                />
+                <p></p>
+                <div className="d-flex justify-content-center mb-2">
+                  <Button onClick={logOut}>Change profile picture</Button>
+                  <Button onClick={logOut} href="/login" className="ms-1">
+                    LOG OUT
+                  </Button>
+                </div>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+          <MDBCol lg="8">
+            <MDBCard className="mb-4">
+              <MDBCardBody>
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Full Name</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{userName}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+                <MDBRow>
+                  <MDBCol sm="3">
+                    <MDBCardText>Email</MDBCardText>
+                  </MDBCol>
+                  <MDBCol sm="9">
+                    <MDBCardText className="text-muted">{userEmail}</MDBCardText>
+                  </MDBCol>
+                </MDBRow>
+                <hr />
+              </MDBCardBody>
+            </MDBCard>
 
-      <MDBRow>
+            <MDBRow>
+              <MDBCol md="6">
+                <MDBCard className="mb-4 mb-md-0">
+                  <MDBCardBody>
+                    <MDBCardText className="mb-4">
+                      <span className="text-primary font-italic me-1">assignment</span> Howdy, Wolrd!
+                    </MDBCardText>
+                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>
+                      Howdy, world!
+                    </MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={progressData['a001'] ? 100 : 0} valuemin={0} valuemax={100} />
+                    </MDBProgress>
 
-        <MDBCol col='10' md='6'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
-        </MDBCol>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>
+                      One sample math question?
+                    </MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={progressData['a002'] ? 100 : 0} valuemin={0} valuemax={100} />
+                    </MDBProgress>
 
-        <MDBCol col='4' md='6'>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>
+                      The Most Beautiful Equation in Math
+                    </MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={progressData['a003'] ? 100 : 0} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
 
-          <MDBInput wrapperClass='mb-4' placeholder='Email address' id='formControlLg' type='email' size="lg" onChange={(e)=> setEmail(e.target.value)}/>
-          <MDBInput wrapperClass='mb-4' placeholder='Password' id='formControlLg' type='password' size="lg" onChange={(e)=>setPassword(e.target.value)}/>
+              <MDBCol md="6">
+                <MDBCard className="mb-4 mb-md-0">
+                  <MDBCardBody>
+                    <MDBCardText className="mb-4">
+                      <span className="text-primary font-italic me-1">assignment</span> Variables and Types
+                    </MDBCardText>
 
-          <div className="d-flex justify-content-between mx-4 mb-4">
-            <a href="signup">Don't have an account?</a>
-            <a href="!#">Forgot password?</a>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>
+                      Variables in Python practice 1
+                    </MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={progressData['b001'] ? 100 : 0} valuemin={0} valuemax={100} />
+                    </MDBProgress>
 
-          </div>
-          
-          <Button className="mb-4 w-100" size="lg" variant="primary" onClick={signIn}>Sign in</Button>{' '}
-
-          <div className="divider d-flex align-items-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">OR</p>
-          </div>
-
-          <GoogleButton
-            onClick={signInwithGoogle}
-            />
-            <Button onClick={logOut}> LOG OUT</Button>
-
-        </MDBCol>
-
-      </MDBRow>
-
-    </MDBContainer>
-    </div>
+                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>
+                      Variables in Python practice 2
+                    </MDBCardText>
+                    <MDBProgress className="rounded">
+                      <MDBProgressBar width={progressData['b002'] ? 100 : 0} valuemin={0} valuemax={100} />
+                    </MDBProgress>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            </MDBRow>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </section>
   );
 }
 

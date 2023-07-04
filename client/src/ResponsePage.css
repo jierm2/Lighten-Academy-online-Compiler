@@ -1,8 +1,11 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-    position: relative;
+  position: relative;
 
+}
+.input-container {
+  position: relative;
 }
 
 .navbar {

@@ -1,59 +1,102 @@
-// import React from 'react';
-// import {
-//   MDBContainer,
-//   MDBCol,
-//   MDBRow,
-//   MDBBtn,
-//   MDBIcon,
-//   MDBInput,
-//   MDBCheckbox
-// }
-// from 'mdb-react-ui-kit';
+import '../App.css';
+import NavBar from './NavBar';
+import React, { useState } from 'react';
+import GoogleButton from 'react-google-button'
+import Button from 'react-bootstrap/Button';
+import {auth,googleProvider} from '../config/firebase';
+import {createUserWithEmailAndPassword,signInWithPopup,signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import {
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBBtn,
+  MDBInput,
+  MDBCheckbox
+}
+from 'mdb-react-ui-kit';
+import { async } from '@firebase/util';
 
-// function login() {
-//   return (
-//     <MDBContainer fluid className="p-3 my-5">
+function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    // console.log(auth.currentUser.email);
+    const signIn = async (email, password) => {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-//       <MDBRow>
+        // Check if the email is verified
+        if (!user.emailVerified) {
+        // Sign out the user
+        await signOut(auth);
 
-//         <MDBCol col='10' md='6'>
-//           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" class="img-fluid" alt="Phone image" />
-//         </MDBCol>
+        alert('Please verify your email before signing in.');
+        return;
+        }
+        // User signed in successfully
+        // Continue with your app's flow
+        window.location.href = "/account";
+    } catch (err) {
+        console.error(err);
+        alert(err.message);
+    }
+    };
 
-//         <MDBCol col='4' md='6'>
+
+    const signInwithGoogle = async () => {
+        console.log('button clicked');
+        try {
+            await signInWithPopup(auth, googleProvider);
+            window.location.href = "/account";
+        } catch (err) {
+            alert(err.message);
+        }
+    }
+    
 
 
-//           <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-//           <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+  return (
+    <div>
+    <NavBar />
+      {/* <login/> */}
+
+    <MDBContainer fluid className="p-3 my-5">
+
+      <MDBRow>
+
+      <MDBCol col='10' md='6'>
+      <img src={process.env.PUBLIC_URL + '/20944201.jpg'} className="img-fluid" alt="Phone image" />
+    </MDBCol>
 
 
-//           <div className="d-flex justify-content-between mx-4 mb-4">
-//             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-//             <a href="!#">Forgot password?</a>
-//           </div>
+        <MDBCol col='4' md='6'>
 
-//           <MDBBtn className="mb-4 w-100" size="lg">Sign in</MDBBtn>
+          <MDBInput wrapperClass='mb-4' placeholder='Email address' id='formControlLg' type='email' size="lg" onChange={(e)=> setEmail(e.target.value)}/>
+          <MDBInput wrapperClass='mb-4' placeholder='Password' id='formControlLg' type='password' size="lg" onChange={(e)=>setPassword(e.target.value)}/>
 
-//           <div className="divider d-flex align-items-center my-4">
-//             <p className="text-center fw-bold mx-3 mb-0">OR</p>
-//           </div>
+          <div className="d-flex justify-content-between mx-4 mb-4">
+            <a href="signup">Don't have an account?</a>
+            <a href="!#">Forgot password?</a>
 
-//           <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
-//             <MDBIcon fab icon="facebook-f" className="mx-2"/>
-//             Continue with facebook
-//           </MDBBtn>
+          </div>
+          
+          <Button className="mb-4 w-100" size="lg" variant="primary" onClick={() => signIn(email, password)}>Sign in</Button>{' '}
 
-//           <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#55acee'}}>
-//             <MDBIcon fab icon="twitter" className="mx-2"/>
-//             Continue with twitter
-//           </MDBBtn>
+          <div className="divider d-flex align-items-center my-4">
+            <p className="text-center fw-bold mx-3 mb-0">OR</p>
+          </div>
 
-//         </MDBCol>
+          <GoogleButton
+            onClick={signInwithGoogle}
+            />
 
-//       </MDBRow>
+        </MDBCol>
 
-//     </MDBContainer>
-//   );
-// }
+      </MDBRow>
 
-// export default login;
+    </MDBContainer>
+    </div>
+  );
+}
+
+export default Login;
