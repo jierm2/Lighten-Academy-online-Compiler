@@ -11,7 +11,7 @@ const addTask = async (task) => {
         taskName: task.title,
         taskType: task.type,  // You need to define this in the exercise object
       });
-      console.log("Task added with ID: ", docRef.id);
+      // console.log("Task added with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding task: ", e);
     }

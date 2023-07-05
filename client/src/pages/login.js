@@ -44,7 +44,7 @@ function Login() {
 
 
     const signInwithGoogle = async () => {
-        console.log('button clicked');
+        // console.log('button clicked');
         try {
             await signInWithPopup(auth, googleProvider);
             window.location.href = "/account";

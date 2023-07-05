@@ -40,7 +40,6 @@ const addTask = async (task) => {
       taskName: task.title,
       taskType: task.type,
     });
-    console.log("Task added with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding task: ", e);
   }

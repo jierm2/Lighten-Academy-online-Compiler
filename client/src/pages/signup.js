@@ -17,7 +17,7 @@ from 'mdb-react-ui-kit';
 
 const addUser = async (user) => {
   try {
-    console.log('begin add user');
+    // console.log('begin add user');
     const docRef = await addDoc(collection(db, "Users"), {
       email: user.email,
       fullName: user.fullName,
@@ -25,7 +25,7 @@ const addUser = async (user) => {
       userID: user.userID,
       vip: false,
     });
-    console.log("User added with ID: ", docRef.id);
+    // console.log("User added with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding user: ", e);
   }
@@ -41,13 +41,13 @@ const addProgressForTasks = async (userID) => {
       return { taskId, ...data };
     });
 
-    console.log('Task IDs:', taskIds);
+    // console.log('Task IDs:', taskIds);
 
-    console.log('printing',taskSnapshot)
+    // console.log('printing',taskSnapshot)
 
     // Step 2: Create progress records based on the task IDs
     const progressPromises = taskIds.map(async (taskId) => {
-      console.log('task idddd is',userID,'taskid',taskId)
+      // console.log('task idddd is',userID,'taskid',taskId)
 
       await addDoc(collection(db, 'Progress'), {
         userID,
@@ -59,10 +59,10 @@ const addProgressForTasks = async (userID) => {
 
     // Step 3: Wait for all progress records to be created
     await Promise.all(progressPromises);
-    console.log(progressPromises)
-    console.log("Progress records created for tasks.");
+    // console.log(progressPromises)
+    // console.log("Progress records created for tasks.");
   } catch (e) {
-    console.error("Error adding progress records: ", e);
+    // console.error("Error adding progress records: ", e);
   }
 };
 
@@ -74,7 +74,7 @@ function Signup() {
 
   const signUp = async () => {
     try {
-      console.log('button clicked');
+      // console.log('button clicked');
       const credential = await createUserWithEmailAndPassword(auth, email, password);
       if (credential && credential.user) {
         await sendEmailVerification(credential.user);
@@ -95,7 +95,7 @@ function Signup() {
           displayName: user.fullName,
         });
   
-        console.log('redirect to login page');
+        // console.log('redirect to login page');
       }
     } catch (err) {
       alert(err.message);

@@ -48,7 +48,7 @@ function PythonTest({ initialCode, setResult, id }) {
               const userId = user.uid;
               const temp = taskId.toLowerCase();
               const q = query(collection(db, 'Progress'), where('userID', '==', userId), where('taskID.taskID', '==', temp));
-              console.log('userid and taskid',userId,taskId)
+              // console.log('userid and taskid',userId,taskId)
               const querySnapshot = await getDocs(q);
 
               if (!querySnapshot.empty) {
@@ -60,14 +60,14 @@ function PythonTest({ initialCode, setResult, id }) {
                     completionDate: new Date(),
                   });
 
-                  console.log('Progress marked as completed');
+                  // console.log('Progress marked as completed');
 
                   // Trigger the callback function to fetch the updated progress data
                 } catch (error) {
                   console.error('An error occurred while updating the progress:', error);
                 }
               } else {
-                console.log('No document to update');
+                // console.log('No document to update');
               }
             }
           }

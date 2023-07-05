@@ -46,7 +46,6 @@ function Account() {
     }
   };
   
-  console.log('progress',progressData)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -65,7 +64,7 @@ function Account() {
   
 
   const logOut = async () => {
-    console.log('button clicked');
+    // console.log('button clicked');
     try {
       await auth.signOut();
     } catch (err) {
@@ -91,7 +90,6 @@ function Account() {
                 />
                 <p></p>
                 <div className="d-flex justify-content-center mb-2">
-                  <Button onClick={logOut}>Change profile picture</Button>
                   <Button onClick={logOut} href="/login" className="ms-1">
                     LOG OUT
                   </Button>
