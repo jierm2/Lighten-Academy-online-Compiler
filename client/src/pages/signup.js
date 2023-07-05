@@ -111,7 +111,7 @@ function Signup() {
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
           <MDBCol col='10' md='6'>
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
+          <img src={process.env.PUBLIC_URL + '/20944201.jpg'} className="img-fluid" alt="Phone image" />
           </MDBCol>
 
           <MDBCol col='4' md='6'>

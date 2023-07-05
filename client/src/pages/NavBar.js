@@ -22,7 +22,7 @@ function NavBar() {
       <Navbar bg="dark">
         <Container fluid>
           <Navbar.Brand href="" className="custom-navbar-brand">
-            Lighten Academy
+            <img src="/logo-white.png" alt="Logo" className="logo" style={{ width: '90px', height: '56.7px' }} /> 
           </Navbar.Brand>
           <Spinner animation="border" variant="light" className="mr-2" />
         </Container>
@@ -34,7 +34,7 @@ function NavBar() {
     <Navbar bg="dark">
       <Container fluid>
         <Navbar.Brand href="" className="custom-navbar-brand">
-          Lighten Academy
+          <img src="/logo-white.png" alt="Logo" className="logo" style={{ width: '90px', height: '56.7px' }} /> 
         </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link href="/" className="custom-nav-link">
