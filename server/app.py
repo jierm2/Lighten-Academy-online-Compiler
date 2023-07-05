@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 # Allow requests only from http://localhost:3000
-CORS(app, origins="10.128.0.2")
+CORS(app, origins="http://10.128.0.2")
 
 
 @app.route('/execute', methods=["POST"])
