@@ -4,17 +4,14 @@ import React, { useState } from 'react';
 import GoogleButton from 'react-google-button'
 import Button from 'react-bootstrap/Button';
 import {auth,googleProvider} from '../config/firebase';
-import {createUserWithEmailAndPassword,signInWithPopup,signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import {signInWithPopup,signInWithEmailAndPassword, signOut} from 'firebase/auth';
 import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBBtn,
   MDBInput,
-  MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-import { async } from '@firebase/util';
 
 function Login() {
     const [email, setEmail] = useState("");

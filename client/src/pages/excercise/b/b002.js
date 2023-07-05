@@ -3,7 +3,7 @@ import NavBar from '../../NavBar';
 import PythonTest from '../../pythonTest';
 
 function B002() {
-  const [result, setResult] = useState('');
+  const [setResult] = useState('');
 
   return (
     <div>

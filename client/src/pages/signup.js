@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import NavBar from './NavBar';
-import GoogleButton from 'react-google-button';
 import Button from 'react-bootstrap/Button';
 import { createUserWithEmailAndPassword, sendEmailVerification,updateProfile } from 'firebase/auth';
 import { addDoc, collection, Timestamp, getDocs } from 'firebase/firestore'; 

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './NavBar';
 import Button from 'react-bootstrap/Button';
 import { auth, db } from '../config/firebase';
-import { getDocs, collection, query, where, getDoc, updateDoc } from 'firebase/firestore';
-import Confetti from 'react-confetti';
+import { collection, query, where } from 'firebase/firestore';
 import {onSnapshot } from 'firebase/firestore';
 
 import {
@@ -14,7 +13,6 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBCardImage,
-  MDBBtn,
   MDBProgress,
   MDBProgressBar,
 } from 'mdb-react-ui-kit';

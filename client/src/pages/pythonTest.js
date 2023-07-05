@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import AceEditor from 'react-ace';
 import { Button, Spinner } from 'react-bootstrap';
 import Confetti from 'react-confetti'
-import { doc, updateDoc } from 'firebase/firestore';
+import {updateDoc } from 'firebase/firestore';
 import { db, auth } from '../config/firebase';
-import { getDoc } from 'firebase/firestore';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 
 import 'ace-builds/src-noconflict/mode-python';
