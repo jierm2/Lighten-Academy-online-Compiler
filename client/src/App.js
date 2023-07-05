@@ -12,7 +12,7 @@ import A002 from './pages/excercise/a/a002';
 import A003 from './pages/excercise/a/a003';
 import B001 from './pages/excercise/b/b001';
 import B002 from './pages/excercise/b/b002';
-import AuthWrapper from './context/ProtectedRoute';
+import AuthWrapper from './context/AuthWrapper';
 
 function App() {
   return (
