@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import AceEditor from 'react-ace';
 import { Button, Spinner } from 'react-bootstrap';
 import Confetti from 'react-confetti'
@@ -18,7 +18,7 @@ function PythonTest({ initialCode, setResult, id }) {
     setCode(newCode);
   };
 
-  const handleRunCode = async () => {
+  const handleRunCode = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -81,25 +81,23 @@ function PythonTest({ initialCode, setResult, id }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [code, id, setResult]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        (event.key === 'Enter' || event.key === 'Return')
-      ) {
+      if ((event.ctrlKey || event.metaKey) && (event.key === 'Enter' || event.key === 'Return')) {
         event.preventDefault();
         handleRunCode();
       }
     };
-
+  
     document.addEventListener('keydown', handleKeyDown);
-
+  
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [code]);
+  }, [code, handleRunCode]); // Include handleRunCode in the dependency array
+  
 
   return (
     <div className="container mt-4">

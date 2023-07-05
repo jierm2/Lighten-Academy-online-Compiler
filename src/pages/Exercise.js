@@ -34,7 +34,7 @@ const exercisesB = [
 
 const addTask = async (task) => {
   try {
-    const docRef = await addDoc(collection(db, "Tasks"), {
+    await addDoc(collection(db, "Tasks"), {
       taskDescription: task.description,
       taskID: task.id,
       taskName: task.title,

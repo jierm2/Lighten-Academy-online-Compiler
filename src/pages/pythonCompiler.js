@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import AceEditor from 'react-ace';
 
 import 'ace-builds/src-noconflict/mode-python';
@@ -13,7 +13,7 @@ function PythonCompiler() {
     setCode(newCode);
   };
   
-  const handleRunCode = async () => {
+  const handleRunCode = useCallback(async () => {
     try {
       const response = await fetch('http://127.0.0.1:5000/execute', {
         method: 'POST',
@@ -40,7 +40,7 @@ function PythonCompiler() {
       console.error('An error occurred while executing the code:', error);
       setOutput('An error occurred while executing the code');
     }
-  };
+  }, [code]);
   
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -58,7 +58,7 @@ function PythonCompiler() {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [code]); // Include code as a dependency in the useEffect hook
+  }, [code,handleRunCode]); // Include code as a dependency in the useEffect hook
 
 
   return (

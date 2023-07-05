@@ -17,7 +17,7 @@ from 'mdb-react-ui-kit';
 const addUser = async (user) => {
   try {
     // console.log('begin add user');
-    const docRef = await addDoc(collection(db, "Users"), {
+    await addDoc(collection(db, "Users"), {
       email: user.email,
       fullName: user.fullName,
       joinDate: Timestamp.fromDate(new Date()), // current date
@@ -110,7 +110,7 @@ function Signup() {
       <MDBContainer fluid className="p-3 my-5">
         <MDBRow>
           <MDBCol col='10' md='6'>
-          <img src={process.env.PUBLIC_URL + '/20944201.jpg'} className="img-fluid" alt="Phone image" />
+          <img src={process.env.PUBLIC_URL + '/20944201.jpg'} className="img-fluid" alt="Phone" />
           </MDBCol>
 
           <MDBCol col='4' md='6'>
