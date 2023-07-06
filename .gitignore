@@ -1,6 +1,6 @@
 # Ignore the node_modules directory
 client/node_modules/
-
+client/package-lock.json
 
 # Ignore the PnP files (used by Yarn)
 client/.pnp
