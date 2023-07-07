@@ -15,7 +15,7 @@ function PythonCompiler() {
   
   const handleRunCode = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/execute', {
+      const response = await fetch('https://pymeow.org/api/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
