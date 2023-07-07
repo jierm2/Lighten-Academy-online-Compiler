@@ -78,6 +78,7 @@ function PythonTest({ initialCode, setResult, id }) {
     } catch (error) {
       console.error('An error occurred while executing the code:', error);
       setOutput('An error occurred while executing the code');
+      
     } finally {
       setIsLoading(false);
     }

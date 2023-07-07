@@ -3,7 +3,9 @@ import NavBar from '../../NavBar';
 import PythonTest from '../../pythonTest';
 
 function A001() {
-  const [setResult] = useState('');
+  const setResult = (result) => {
+    // console.log(result);
+  };
 
   return (
     <div>
@@ -18,9 +20,11 @@ function A001() {
         </p>
 
         <PythonTest initialCode={'print("Want to learn some programming?")'} setResult={setResult} id="A001" />
+        
       </div>
     </div>
   );
 }
 
 export default A001;
+
