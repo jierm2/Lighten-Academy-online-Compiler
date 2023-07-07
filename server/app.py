@@ -1,12 +1,12 @@
 import traceback
 import importlib
 import subprocess
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-
-app = Flask(__name__)
+import os
+app = Flask(__name__, static_folder='build')
 # Allow requests only from http://localhost:3000
-CORS(app, origins="http://127.0.0.1:5000")
+CORS(app, origins="http://18.222.219.77:3000")
 
 
 @app.route('/execute', methods=["POST"])
@@ -71,6 +71,14 @@ def execute_code():
             "output": f"An error occurred: {error_message}. Check your code and try again.", "ok": False
         }
         return jsonify(response), 200
+
+
+@app.route('/', defaults={'path': ''})
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':
