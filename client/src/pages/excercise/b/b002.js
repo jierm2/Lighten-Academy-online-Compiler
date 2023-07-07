@@ -3,8 +3,9 @@ import NavBar from '../../NavBar';
 import PythonTest from '../../pythonTest';
 
 function B002() {
-  const [setResult] = useState('');
-
+  const setResult = (result) => {
+    // console.log(result);
+  };
   return (
     <div>
       <NavBar />

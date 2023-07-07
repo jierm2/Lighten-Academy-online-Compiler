@@ -13,7 +13,6 @@ CORS(app, origins="http://18.222.219.77:3000")
 def execute_code():
     code = request.json.get("code")
     uid = request.json.get("exercise_id")
-    print(uid)
     try:
         # Execute the Python code using subprocess.Popen
         process = subprocess.Popen(
@@ -31,18 +30,15 @@ def execute_code():
             response = {"output": stderr}
             return jsonify(response), 200
 
-        print('uid')
         # Run test cases
         output = output.replace('\r\n', '\n')
 
         if uid:
-            print('uid')
             test_module = importlib.import_module(f'tests.test_{uid}')
             test_func = getattr(test_module, f'test_exercise_{uid}')
             test = test_func(code, output)
             # Check if the output equals the expected output
             # print expected output
-            print(f"Actual: {repr(output)}")  # print actual output
             # [0] = true, [1] = expected result
             if test[0]:
                 response = {
@@ -54,7 +50,6 @@ def execute_code():
                     "output": f"TESTING FAILED 😔\n\nSolution printed: {test[1]}\n---\nSubmission printed:  {output}" +
                     (f"\n---\n{test[2]}" if len(test) > 2 else ""), "ok": False
                 }
-                print('response is ', response)
             return jsonify(response), 200
 
         else:
