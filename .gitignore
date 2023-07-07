@@ -12,7 +12,6 @@ client/coverage
 
 
 # Ignore the build directory (used for production builds)
-client/build
 
 
 # Ignore miscellaneous files
