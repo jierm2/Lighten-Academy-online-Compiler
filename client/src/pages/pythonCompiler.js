@@ -1,5 +1,6 @@
 import React, { useState, useEffect,useCallback } from 'react';
 import AceEditor from 'react-ace';
+import { Button, Spinner } from 'react-bootstrap';
 
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -8,12 +9,14 @@ function PythonCompiler() {
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
   const [codeExecuted, setCodeExecuted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCodeChange = (newCode) => {
     setCode(newCode);
   };
   
   const handleRunCode = useCallback(async () => {
+    setIsLoading(true);
     try {
       const response = await fetch('https://pymeow.org/api/execute', {
         method: 'POST',
@@ -60,35 +63,48 @@ function PythonCompiler() {
     };
   }, [code,handleRunCode]); // Include code as a dependency in the useEffect hook
 
-
   return (
     <div className="container mt-4">
-      <AceEditor
-        mode="python"
-        theme="monokai"
-        fontSize={16}
-        value={code}
-        onChange={handleCodeChange}
-        placeholder="Write your Python code here"
-        style={{
-          width: '100%',
-          height: '470px',
-          borderRadius: '10px',
-          padding: '20px',
-        }}
-        showPrintMargin={false}
-      />
-  
+      <div className="input-container">
+        <AceEditor
+          mode="python"
+          theme="monokai"
+          fontSize={16}
+          value={code}
+          onChange={handleCodeChange}
+          placeholder="Write your Python code here"
+          style={{
+            width: '100%',
+            height: '470px',
+            borderRadius: '10px',
+            padding: '20px',
+          }}
+          showPrintMargin={false}
+        />
+
+        <Button
+          onClick={handleRunCode}
+          variant="success"
+          disabled={!code || isLoading}
+          className="run-button"
+        >
+          {isLoading ? (
+            <>
+              <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /> 
+            </>
+          ) : (
+            'Run'
+          )}
+        </Button>
+      </div>
+
       <br />
-  
-      <button className="run-button" onClick={handleRunCode}>
-        ▶️
-      </button>
-  
+
       <div className="terminal">
         <div className="terminal-body" style={{ borderRadius: '10px' }}>
           <pre>
-            {output} {codeExecuted ? null : 'Press Control-Enter to run the code above'}
+            {codeExecuted}
+            {output} {output ? null : 'Press Control-Enter to run the code above'}
           </pre>
         </div>
       </div>
