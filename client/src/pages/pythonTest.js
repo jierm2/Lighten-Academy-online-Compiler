@@ -22,7 +22,7 @@ function PythonTest({ initialCode, setResult, id }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://172.31.25.5:5000/execute', {
+      const response = await fetch('http://18.222.219.77:5000/execute', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
