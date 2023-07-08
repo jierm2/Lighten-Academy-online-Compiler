@@ -1,17 +1,18 @@
 import '../App.css';
 import NavBar from './NavBar';
 import React, { useState } from 'react';
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
 import Button from 'react-bootstrap/Button';
-import {auth,googleProvider} from '../config/firebase';
-import {signInWithPopup,signInWithEmailAndPassword, signOut} from 'firebase/auth';
+import { auth, googleProvider, db } from '../config/firebase';
+import { signInWithPopup, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { getDocs, collection } from 'firebase/firestore';
 import {
   MDBContainer,
   MDBCol,
   MDBRow,
   MDBInput,
-}
-from 'mdb-react-ui-kit';
+} from 'mdb-react-ui-kit';
+import { addUser, addProgressForTasks } from '../components/userUtils';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -39,17 +40,48 @@ function Login() {
     }
     };
 
-
     const signInwithGoogle = async () => {
-        // console.log('button clicked');
-        try {
-            await signInWithPopup(auth, googleProvider);
-            window.location.href = "/account";
-        } catch (err) {
-            alert(err.message);
-        }
-    }
-    
+      try {
+          const result = await signInWithPopup(auth, googleProvider);
+          const user = result.user;
+  
+          if (user) {
+              // Check if the user already exists in the Users collection
+              const userSnapshot = await getDocs(collection(db, 'Users'));
+              const users = userSnapshot.docs.map(doc => doc.data());
+  
+              // Check if the user exists in your users collection
+              const userExists = users.some(u => u.userID === user.uid);
+  
+              if (!userExists) {
+                  // User does not exist, so create user
+                  const newUser = {
+                      email: user.email,
+                      fullName: user.displayName,
+                      userID: user.uid,
+                      vip: false,
+                  };
+  
+                  // Add the user to the Users collection
+                  await addUser(newUser);
+  
+                  // Add progress for tasks for the user
+                  await addProgressForTasks(user.uid);
+  
+                  // Update the display name for the user
+                  await updateProfile(auth.currentUser, {
+                      displayName: user.displayName,
+                  });
+              }
+          }
+  
+          // Continue with your app's flow
+          window.location.href = "/account";
+      } catch (err) {
+          alert(err.message);
+      }
+  };
+  
 
 
   return (
