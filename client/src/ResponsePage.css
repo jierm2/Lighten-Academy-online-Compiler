@@ -26,22 +26,6 @@
   font-size: 1rem;
 }
 
-
-
-
-.compiler {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  width: 100%;
-  height: 50vh;
-  padding-top: 15%;
-  box-sizing: border-box;
-  gap: 0;
-  margin: 0 auto; /* Center horizontally */
-}
-
-
-
 .editor-container {
   position: relative;
   display: flex;
@@ -49,26 +33,25 @@
   justify-content: flex-start;
   align-items: stretch;
   width: 100%;
-  height: 50vh;
+  height: 80vh; /* Updated: Set the height to 50% */
   background-color: #000000;
   border-radius:5px 0 0 5px;
   color: #abb2bf;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   overflow: auto;
-  
   box-sizing: border-box;
   position: relative; /* Add position relative */
-
+  padding: 0;  /* Removed padding */
+  margin: 0; 
 }
 .output-container {
   position: relative;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   width: 100%;
-  height: 50vh;
+  height: 80vh; /* Updated: Set the height to 50% */
   background-color: #000000;
   border-radius:0 5px 5px 0;;
   color: #abb2bf;
@@ -76,7 +59,8 @@
   overflow: auto;
   box-sizing: border-box;
   position: relative; /* Add position relative */
-
+  padding: 0;  /* Removed padding */
+  margin: 0; 
 }
 
 
@@ -114,7 +98,7 @@ pre {
   font-size: 1.2em;
   font-weight: bold;
   background-color: #282c34;  /* Updated: Dark blue background color */
-  padding: 1.5%;
+  padding: 2.7%;
   color: #fff; /* Updated: White color for text */
 }
 
@@ -176,3 +160,8 @@ pre {
   margin-top: -0.3%; /* Adjust this value as necessary */
 
 }
+
+.strike-through {
+  text-decoration: line-through;
+}
+

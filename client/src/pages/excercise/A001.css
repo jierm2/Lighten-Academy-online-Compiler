@@ -1,0 +1,15 @@
+.markdown {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.markdown h1 {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.markdown p {
+  margin-bottom: 10px;
+}

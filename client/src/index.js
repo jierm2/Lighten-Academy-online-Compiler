@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthContext';  // Import the AuthProvider component
+import './components/global.css'; // Import the global CSS file
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

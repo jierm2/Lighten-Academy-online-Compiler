@@ -6,8 +6,8 @@ from flask_cors import CORS
 import os
 app = Flask(__name__, static_folder='build')
 # Allow requests only from http://localhost:3000
-# CORS(app, origins="http://18.222.219.77:3000")
-CORS(app, origins="http://localhost:3000")
+CORS(app, origins="http://18.222.219.77:3000")
+# CORS(app, origins="http://localhost:3000")
 
 
 @app.route('/execute', methods=["POST"])
@@ -69,12 +69,12 @@ def execute_code():
         return jsonify(response), 200
 
 
-# @app.route('/', defaults={'path': ''})
-# def serve(path):
-#     if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-#         return send_from_directory(app.static_folder, path)
-#     else:
-#         return send_from_directory(app.static_folder, 'index.html')
+@app.route('/', defaults={'path': ''})
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 
 if __name__ == '__main__':

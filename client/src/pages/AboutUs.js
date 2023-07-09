@@ -1,5 +1,6 @@
 import React from 'react';
-import NavBar from './NavBar';
+import { Container } from 'react-bootstrap';
+import NavBar from '../components/NavBar';
 import '../AboutUs.css';
 
 function AboutUs() {
@@ -7,10 +8,9 @@ function AboutUs() {
     <div>
       <NavBar />
 
-      <div className="container mt-4 letter">
-
+      <Container className="mt-4 letter">
         <div className="letter-header">
-          <h1>Welcome to Python for Kids!</h1>
+          <h1>Welcome to Pymeow!</h1>
         </div>
 
         <div className="letter-body">
@@ -33,19 +33,18 @@ function AboutUs() {
 
         <div className="letter-signature">
           <p>
-            Your friend,
-            <br />
             Jimmy Miao
             <br />
-            A college student studying Computer Science and Statistics at the 
+            A college student studying Statistics&Computer Science at the &nbsp;
             <span className="school-name"> 
-  University of Illinois Urbana-Champaign     
-  <a href="https://cs.illinois.edu/" target="_blank" rel="noopener noreferrer">
-    <img src="https://cdn.vox-cdn.com/uploads/chorus_image/image/56187477/DHNkdRfXoAEp2VD.0.jpg" alt="UIUC Logo" className="school-logo" />
-  </a>
-</span>          </p>
+              University of Illinois Urbana-Champaign
+            </span>
+            <a href="https://cs.illinois.edu/" target="_blank" rel="noopener noreferrer" className="school-link">
+              <img src="https://cdn.vox-cdn.com/uploads/chorus_image/image/56187477/DHNkdRfXoAEp2VD.0.jpg" alt="UIUC Logo" className="school-logo" />
+            </a>
+          </p>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

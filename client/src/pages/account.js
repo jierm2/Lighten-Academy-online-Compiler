@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 import Button from 'react-bootstrap/Button';
 import { auth, db } from '../config/firebase';
 import { collection, query, where } from 'firebase/firestore';
-import {onSnapshot } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 
 import {
   MDBCol,
@@ -43,7 +43,6 @@ function Account() {
       console.error('Error fetching progress data:', error);
     }
   };
-  
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -56,13 +55,11 @@ function Account() {
         };
       }
     });
-  
+
     return () => unsubscribe();
   }, []);
-  
 
   const logOut = async () => {
-    // console.log('button clicked');
     try {
       await auth.signOut();
     } catch (err) {
@@ -71,7 +68,7 @@ function Account() {
   };
 
   return (
-    <section style={{ backgroundColor: '#eee' }}>
+    <section>
       <NavBar />
 
       <MDBContainer className="py-5">
@@ -79,17 +76,17 @@ function Account() {
           <MDBCol lg="4">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
-                <MDBCardImage
-                  src="/minions-guitar-1398006_1280.jpg"
-                  
-                  alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: '150px' }}
-                  fluid
-                />
-                <p></p>
-                <div className="d-flex justify-content-center mb-2">
-                  <Button onClick={logOut} href="/login" className="ms-1">
+                <div className="d-flex justify-content-center mb-4">
+                  <MDBCardImage
+                    src="/minions-guitar-1398006_1280.jpg"
+                    alt="avatar"
+                    className="rounded-circle"
+                    style={{ width: '150px' }}
+                    fluid
+                  />
+                </div>
+                <div className="d-flex justify-content-center">
+                  <Button onClick={logOut} href="/login">
                     LOG OUT
                   </Button>
                 </div>

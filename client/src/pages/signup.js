@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 import Button from 'react-bootstrap/Button';
 import { createUserWithEmailAndPassword, sendEmailVerification,updateProfile } from 'firebase/auth';
 import { auth } from '../config/firebase';

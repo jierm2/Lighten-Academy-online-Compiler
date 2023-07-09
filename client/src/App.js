@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/signup';
 import AboutUs from './pages/AboutUs';
+import Playground from './pages/Playground';
+
 import { UserProvider } from './context/Usercontext';
 import Account from './pages/account';
 import A001 from './pages/excercise/a/a001';
@@ -22,6 +24,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/playground" element={<Playground />} />
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/login" element={<AuthWrapper nonAuthenticated={true}><Login /></AuthWrapper>} />
           <Route path="/signup" element={<AuthWrapper nonAuthenticated={true}><Signup /></AuthWrapper>} />

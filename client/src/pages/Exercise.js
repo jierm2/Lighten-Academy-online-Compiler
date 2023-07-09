@@ -1,7 +1,7 @@
 import React from 'react';
 import '../ResponsePage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';

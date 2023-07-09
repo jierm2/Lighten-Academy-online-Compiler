@@ -1,5 +1,5 @@
 import '../App.css';
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 import React, { useState } from 'react';
 import GoogleButton from 'react-google-button';
 import Button from 'react-bootstrap/Button';
@@ -105,7 +105,7 @@ function Login() {
 
           <div className="d-flex justify-content-between mx-4 mb-4">
             <a href="signup">Don't have an account?</a>
-            <a href="!#">Forgot password?</a>
+            <a href="!#" className='strike-through'>Forgot password?</a>
 
           </div>
           

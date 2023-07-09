@@ -1,34 +1,40 @@
 .letter {
-    background: url("https://www.123rf.com/photo_16320184_natural-decorative-recycled-art-letter-paper-texture-light-rough-textured-spotted-blank-copy-space.html"); /* Replace with your own image */
-    padding: 30px;
-    border-radius: 20px;
-    font-family: 'Comic Sans MS', sans-serif; /* Choose a font that resembles handwriting */
-  }
-  
-  .letter-header {
-    text-align: center;
-    color: #ff4500;
-    border-bottom: 1px solid #000;
-    margin-bottom: 20px;
-  }
-  
-  .letter-body {
-    text-indent: 20px;
-  }
-  
-  .letter-signature {
-    text-align: right;
-    margin-top: 30px;
-  }
-  
-  .school-logo {
-    width: 60px; /* Change according to your needs */
-    height: 40px; /* Change according to your needs */
-    margin-left: 10px;
-  }
-  
-  .school-name {
-    display: inline-block;
-    vertical-align: middle;
-  }
-  
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.5;
+}
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.letter-body {
+  text-align: left; /* Align the text from left to right */
+
+  margin-bottom: 20px;
+}
+
+.letter-signature {
+  text-align: right;
+  font-style: italic;
+}
+
+.school-name {
+  margin-right: 5px;
+}
+
+.school-logo {
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  margin-top: 4px; /* Adjust the margin-top value to position the logo lower */
+
+}
+
+.school-link {
+  display: inline-block;
+  margin-left: 5px;
+}
