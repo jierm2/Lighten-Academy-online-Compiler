@@ -12,11 +12,10 @@ function Home() {
 
       <div className="container">
         {/* Content */}
-        <div className="container mt-4">
-          <h1>Python Playground</h1>
+        {/* <div className="container mt-4"> */}
           {/* Code input text area */}
           <PythonCompiler />
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

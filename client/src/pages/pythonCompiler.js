@@ -1,39 +1,65 @@
-import React, { useState, useEffect,useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import AceEditor from 'react-ace';
-import { Button, Spinner } from 'react-bootstrap';
-
+import {Spinner } from 'react-bootstrap';
 import 'ace-builds/src-noconflict/mode-python';
 import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/ext-language_tools';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Typography from '@mui/material/Typography';
+import RedoIcon from '@mui/icons-material/Redo';
+import UndoIcon from '@mui/icons-material/Undo';
 
 function PythonCompiler() {
   const [code, setCode] = useState('');
   const [output, setOutput] = useState('');
-  const [codeExecuted, setCodeExecuted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [history,setHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(0);
+  const handleClear = () => {
+    setIsLoading(false);
+    setCode('');
+    setOutput('');
+  };
+  let editorRef; // reference to the AceEditor component
 
   const handleCodeChange = (newCode) => {
+    setHistory((prevHistory) => {
+      const newHistory = [...prevHistory];
+      newHistory.splice(historyIndex + 1, newHistory.length, newCode);
+      return newHistory;
+    });
+    setHistoryIndex((prevHistoryIndex) => prevHistoryIndex + 1);
     setCode(newCode);
+  };
+
+  const handleUndo = () => {
+    const { editor } = editorRef;
+    editor.undo();
+  };
+  
+  const handleRedo = () => {
+    const { editor } = editorRef;
+    editor.redo();
   };
   
   const handleRunCode = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch('http://localhost:5000/execute', {
-
-      method: 'POST',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ code }),
       });
-  
+
       if (response.ok) {
         const result = await response.json();
-  
         if (result.error) {
           setOutput('Error:\n' + result.error);
         } else {
-          setCodeExecuted(true);
           setOutput(result.output);
         }
       } else {
@@ -47,73 +73,122 @@ function PythonCompiler() {
       setIsLoading(false);
     }
   }, [code]);
-  
+
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // Check if Ctrl key and Enter/Return key are pressed
       if ((event.ctrlKey || event.metaKey) && (event.key === 'Enter' || event.key === 'Return')) {
-        event.preventDefault(); // Prevent default behavior
-        handleRunCode(); // Call handleRunCode immediately with the current code value
+        event.preventDefault(); 
+        handleRunCode();
       }
     };
 
-    // Add event listener for keydown event
     document.addEventListener('keydown', handleKeyDown);
 
-    // Clean up the event listener on component unmount
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [code,handleRunCode]); // Include code as a dependency in the useEffect hook
+  }, [handleRunCode]);
 
   return (
-    <div className="container mt-4">
-      <div className="input-container">
+    
+    <div className="compiler">
+      <div className="editor-container">
+        
+        <div className="controls">
+        <Button
+          startIcon={<SettingsIcon/>}
+          variant="contained"
+          size="small"
+          onClick={handleRunCode}
+          disabled={!code || isLoading}
+          color={"success"}
+          sx={{
+            position: 'relative',
+            display: isLoading ? 'none' : 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            "&.Mui-disabled": {
+              background: "#1976d2",
+              color: "#c0c0c0"
+            }
+          }}
+        >
+
+          <Typography fontWeight="bold" fontSize={12} letterSpacing={1}> Run </Typography>
+        </Button>
+
+        <Button
+          variant="contained"
+          size="small"
+          color={"success"}
+          sx={{
+            position: 'relative',
+            display: isLoading ? 'flex' : 'none',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
+          <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+        </Button>
+
+
+
+          <Button variant="contained" size="small" startIcon={<UndoIcon />} onClick={handleUndo}>
+            <Typography fontWeight="bold" fontSize={12} letterSpacing={1}> Undo  </Typography>
+          </Button>
+
+          <Button variant="contained" size="small"  startIcon={<RedoIcon />} onClick={handleRedo}>
+            <Typography fontWeight="bold" fontSize={12} letterSpacing={1}> Redo </Typography>
+          </Button>
+
+          <Button variant="contained" size="small" color="error" startIcon={<DeleteIcon />} onClick={handleClear}>
+            <Typography fontWeight="bold" fontSize={12} letterSpacing={1}> Delete </Typography>
+          </Button>
+        </div>
         <AceEditor
           mode="python"
           theme="monokai"
-          fontSize={16}
+          fontSize={15}
           value={code}
           onChange={handleCodeChange}
-          placeholder="Write your Python code here"
-          style={{
-            width: '100%',
-            height: '470px',
-            borderRadius: '10px',
-            padding: '20px',
-          }}
+          placeholder="Write your Python code here..."
+          className="code-editor"
           showPrintMargin={false}
+          width="100%"
+          height="100%"
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+          }}
+          editorProps={{ $blockScrolling: Infinity }}
+          ref={(instance) => { editorRef = instance; }} // get the reference to the AceEditor instance
         />
-
-        <Button
-          onClick={handleRunCode}
-          variant="success"
-          disabled={!code || isLoading}
-          className="run-button"
-        >
-          {isLoading ? (
-            <>
-              <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" /> 
-            </>
-          ) : (
-            'Run'
-          )}
-        </Button>
       </div>
-
-      <br />
-
-      <div className="terminal">
-        <div className="terminal-body" style={{ borderRadius: '10px' }}>
-          <pre>
-            {codeExecuted}
-            {output} {output ? null : 'Press Control-Enter to run the code above'}
-          </pre>
-        </div>
+ 
+      <div className="output-container">
+        
+        <div className="terminal-header">Console</div>
+        
+        <AceEditor
+          mode="text"
+          theme="monokai"
+          fontSize={15}
+          value={output}
+          readOnly={true}
+          className="terminal-body"
+          showPrintMargin={false}
+          width="100%"
+          height="100%"
+          setOptions={{
+            wrap: true,
+            showGutter: false,
+            highlightActiveLine: false,
+          }}
+          editorProps={{ $blockScrolling: Infinity }}
+        />
       </div>
     </div>
   );
-  
 }
 
 export default PythonCompiler;
