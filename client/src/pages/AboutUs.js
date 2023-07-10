@@ -2,15 +2,29 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import NavBar from '../components/NavBar';
 import '../AboutUs.css';
+import { TypeAnimation } from 'react-type-animation';
 
 function AboutUs() {
+  const underlineStyle = {
+    textDecoration: 'underline' 
+  };
   return (
     <div>
       <NavBar />
 
       <Container className="mt-4 letter">
         <div className="letter-header">
-          <h1>Welcome to Pymeow!</h1>
+          <h1>Welcome to <TypeAnimation
+                sequence={[
+                  // Same substring at the start will only be typed out once, initially
+                  'Pymeow!',
+                  1000,
+                ]}
+                wrapper="span"
+                speed={300}
+                style={underlineStyle}
+                repeat={Infinity}
+              /></h1>
         </div>
 
         <div className="letter-body">
@@ -29,18 +43,23 @@ function AboutUs() {
           <p>
             So, buckle up and get ready to explore the dazzling world of Python for Kids! We'll play, learn, and let our imaginations fly together.
           </p>
+          <p>
+        Hudge credit to{' '}
+          <a href="https://www.learncs.online/" target="_blank" rel="noreferrer">learncs.online </a> by Geoffrey Challen
+          </p>
+          <p> Are you interested in learning coding or exploring other fields? Join us by signing up here! {''}<a href="https://www.lightenacademy.com/" target="_blank" rel="noreferrer">Lighten Academy</a></p>
         </div>
 
         <div className="letter-signature">
           <p>
             Jimmy Miao
             <br />
-            A college student studying Statistics&Computer Science at the &nbsp;
+            Studying Statistics&Computer Science at the &nbsp;
             <span className="school-name"> 
-              University of Illinois Urbana-Champaign
+              University of Illinois Urbana-Champaign 
             </span>
-            <a href="https://cs.illinois.edu/" target="_blank" rel="noopener noreferrer" className="school-link">
-              <img src="https://cdn.vox-cdn.com/uploads/chorus_image/image/56187477/DHNkdRfXoAEp2VD.0.jpg" alt="UIUC Logo" className="school-logo" />
+            <a href="https://illinois.edu/" target="_blank" rel="noopener noreferrer" className="school-link">
+              <img src="/DHNkdRfXoAEp2VD0.jpg" alt="UIUC Logo" className="school-logo" />
             </a>
           </p>
         </div>

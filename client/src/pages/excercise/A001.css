@@ -13,3 +13,24 @@
 .markdown p {
   margin-bottom: 10px;
 }
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  list-style-type: disc;
+  padding-left: 1rem;
+}
+
+li {
+  margin-top: 0.25rem;
+}
+

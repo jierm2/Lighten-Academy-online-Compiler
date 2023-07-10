@@ -7,7 +7,7 @@ import os
 app = Flask(__name__, static_folder='build')
 # Allow requests only from http://localhost:3000
 CORS(app, origins="http://18.222.219.77:3000")
-# CORS(app, origins="http://localhost:3000")
+# CORS(app)
 
 
 @app.route('/execute', methods=["POST"])

@@ -33,6 +33,9 @@ function NavBar() {
           <Nav.Link href="/exercise" className="custom-nav-link">
             Exercise
           </Nav.Link>
+          <Nav.Link href="/notes" className="custom-nav-link">
+            Notes
+          </Nav.Link>
           <Nav.Link href="/aboutUs" className="custom-nav-link">
             About us
           </Nav.Link>

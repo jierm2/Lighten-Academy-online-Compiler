@@ -27,11 +27,11 @@
 }
 
 .school-logo {
-  width: 40px;
+  width: 46px;
   height: 40px;
   vertical-align: middle;
+  
   margin-top: 4px; /* Adjust the margin-top value to position the logo lower */
-
 }
 
 .school-link {

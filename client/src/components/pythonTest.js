@@ -45,6 +45,8 @@ function PythonTest({ initialCode, setResult, id }) {
     setIsLoading(true);
     try {
       const response = await fetch('https://pymeow.org/api/execute', {
+      // const response = await fetch('http://localhost:5000/execute', {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
