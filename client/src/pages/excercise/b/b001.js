@@ -28,7 +28,7 @@ function B001() {
           </p>
         </div>
 
-        <PythonTest initialCode={'#Start coding here\n'} setResult={setResult} id="B001" />
+        <PythonTest setResult={setResult} id="B001" />
       </div>
     </div>
   );

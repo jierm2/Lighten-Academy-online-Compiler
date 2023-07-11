@@ -43,13 +43,13 @@ function App() {
           <Route path="/signup" element={<AuthWrapper nonAuthenticated={true}><Signup /></AuthWrapper>} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/account" element={<AuthWrapper><Account /></AuthWrapper>} />
-          <Route path="/a001" element={<A001 />} />
-          <Route path="/a002" element={<A002 />} />
-          <Route path="/a003" element={<A003 />} />
-          <Route path="/b001" element={<B001 />} />
-          <Route path="/b002" element={<B002 />} />
-          <Route path="/c001" element={<C001 />} />
-          <Route path="/c002" element={<C002 />} />
+          <Route path="/exercise/a001" element={<A001 />} />
+          <Route path="/exercise/a002" element={<A002 />} />
+          <Route path="/exercise/a003" element={<A003 />} />
+          <Route path="/exercise/b001" element={<B001 />} />
+          <Route path="/exercise/b002" element={<B002 />} />
+          <Route path="/exercise/c001" element={<C001 />} />
+          <Route path="/exercise/c002" element={<C002 />} />
 
         </Routes>
       </div>

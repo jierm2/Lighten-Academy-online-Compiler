@@ -13,6 +13,7 @@ export default function ActionAreaCard() {
   const lessons = [
     { date: "07-05-2023", day: "Wednesday" },
     { date: "07-07-2023", day: "Friday" },
+    { date: "07-10-2023", day: "Monday" }
     // { date: "07-10-2023", day: "Monday" },
     // add more classes as needed
   ];
@@ -28,7 +29,7 @@ export default function ActionAreaCard() {
                 <CardActionArea component={RouterLink} to={`/notes/day${index + 1}`}>
                   <LazyLoadImage 
                     src="/day1.jpg" // replace with the path to your image
-                    alt="Python Class"
+                    alt="Python Class day"
                     height="350px"
                     effect="blur" // remove this line if you don't want the blur effect
                     style={{ width: '100%', objectFit: 'cover' }}

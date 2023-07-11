@@ -27,7 +27,7 @@ function B002() {
             Take a moment to think about the values you want to assign to these variables. You don't need to print them. Enjoy exploring the world of variables!
           </p>
 
-          <PythonTest initialCode={'#Start coding here\n'} setResult={setResult} id='B002' colorC={'?'} />
+          <PythonTest setResult={setResult} id='B002' colorC={'?'} />
         </div>
       </div>
     </div>
