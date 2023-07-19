@@ -20,11 +20,11 @@ print('Howdy, world!)`;
           justifyContent: 'center',
           alignItems: 'center',
           // minHeight: 'calc(100vh - 64px)', // Adjust for the height of the NavBar
-          padding: '0 15%',
+          padding: '0 10%',
 
         }}
       >
-        <div style={{ width: '70%' }}>
+        <div style={{ width: '100%' }}>
         <h1><TypeAnimation
                 sequence={[
                   'Day 1',

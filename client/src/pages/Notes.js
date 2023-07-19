@@ -15,7 +15,7 @@ export default function ActionAreaCard() {
     { date: "07-07-2023", day: "Friday" },
     { date: "07-10-2023", day: "Monday" },
     { date: "07-12-2023", day: "Wednesday" },
-    { date: "07-14-2023", day: "Friday" },
+    // { date: "07-14-2023", day: "Friday" },
     { date: "07-17-2023", day: "Monday" }
 
     // { date: "07-10-2023", day: "Monday" },

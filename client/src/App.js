@@ -13,7 +13,7 @@ import Day1 from './pages/notes/Day1';
 import Day2 from './pages/notes/Day2';
 import Day3 from './pages/notes/Day3';
 import Day4 from './pages/notes/Day4';
-import Day5 from './pages/notes/Day5';
+import Day5 from './pages/notes/Day6';
 
 
 import { UserProvider } from './context/Usercontext';
