@@ -1,30 +1,3 @@
-.navbar {
-  background-color: #f8f9fa;
-  padding: 10px;
-}
-
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
-}
-
-.navbar-nav {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-item {
-  padding: 0;
-}
-
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-}
 
 .editor-container {
   position: relative;
@@ -164,4 +137,6 @@ pre {
 .strike-through {
   text-decoration: line-through;
 }
+
+
 

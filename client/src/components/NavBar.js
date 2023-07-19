@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Navbar, Container, Spinner } from 'react-bootstrap';
-import Nav from 'react-bootstrap/Nav';
+import { Navbar, Container, Spinner, Nav } from 'react-bootstrap';
 import { UserContext } from '../context/Usercontext.js';
 
 function NavBar() {
@@ -18,50 +17,43 @@ function NavBar() {
   }, []);
 
   return (
-    <Navbar bg="dark">
+    <Navbar bg="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="" className="custom-navbar-brand">
           <img src="/logo-white.png" alt="Logo" className="logo" style={{ width: '90px', height: '56.7px' }} /> 
         </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/" className="custom-nav-link">
-            Home
-          </Nav.Link>
-          <Nav.Link href="/playground" className="custom-nav-link">
-            Playground
-          </Nav.Link>
-          <Nav.Link href="/exercise" className="custom-nav-link">
-            Exercise
-          </Nav.Link>
-          <Nav.Link href="/notes" className="custom-nav-link">
-            Notes
-          </Nav.Link>
-          <Nav.Link href="/aboutUs" className="custom-nav-link">
-            About us
-          </Nav.Link>
-        </Nav>
-        <Nav>
-          {isLoading ? (
-            <div style={{ position: 'relative', display: 'inline-block' }}>
-              <Spinner animation="grow" variant="light" size="sm" role="status" aria-hidden="true" style={{
-                      position: 'absolute', left: '30%', top: '20%'}} />
-              <span style={{visibility: 'hidden'}}>Account</span>
-            </div>
-          ) : (
-            <>
-              {user && user.emailVerified && (
-                <Nav.Link href="/account" className="custom-nav-link">
-                  Account
-                </Nav.Link>
-              )}
-              {!user && (
-                <Nav.Link href="/login" className="custom-nav-link">
-                  Log in
-                </Nav.Link>
-              )}
-            </>
-          )}
-        </Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ background: 'white' }} />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/" className="custom-nav-link">Home</Nav.Link>
+            <Nav.Link href="/playground" className="custom-nav-link">Playground</Nav.Link>
+            <Nav.Link href="/exercise" className="custom-nav-link">Exercise</Nav.Link>
+            <Nav.Link href="/notes" className="custom-nav-link">Notes</Nav.Link>
+            <Nav.Link href="/aboutUs" className="custom-nav-link">About us</Nav.Link>
+          </Nav>
+          <Nav>
+            {isLoading ? (
+              <div style={{ position: 'relative', display: 'inline-block' }}>
+                <Spinner animation="grow" variant="light" size="sm" role="status" aria-hidden="true" style={{
+                        position: 'absolute', left: '30%', top: '20%'}} />
+                <span style={{visibility: 'hidden'}}>Account</span>
+              </div>
+            ) : (
+              <>
+                {user && user.emailVerified && (
+                  <Nav.Link href="/account" className="custom-nav-link">
+                    Account
+                  </Nav.Link>
+                )}
+                {!user && (
+                  <Nav.Link href="/login" className="custom-nav-link">
+                    Log in
+                  </Nav.Link>
+                )}
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
