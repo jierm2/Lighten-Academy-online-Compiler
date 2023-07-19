@@ -11,6 +11,9 @@ import AboutUs from './pages/AboutUs';
 
 import Day1 from './pages/notes/Day1';
 import Day2 from './pages/notes/Day2';
+import Day3 from './pages/notes/Day3';
+import Day4 from './pages/notes/Day4';
+import Day5 from './pages/notes/Day5';
 
 
 import { UserProvider } from './context/Usercontext';
@@ -27,7 +30,6 @@ import AuthWrapper from './context/AuthWrapper';
 function App() {
   return (
     <UserProvider>
-
     <Router>
       <div className="App">
         <Routes>
@@ -36,7 +38,9 @@ function App() {
           <Route path="/notes" element={<Notes />} />
           <Route path="/notes/day1" element={<Day1 />} />
           <Route path="/notes/day2" element={<Day2 />} />
-
+          <Route path="/notes/day3" element={<Day3 />} />
+          <Route path="/notes/day4" element={<Day4 />} />
+          <Route path="/notes/day5" element={<Day5 />} />
 
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/login" element={<AuthWrapper nonAuthenticated={true}><Login /></AuthWrapper>} />
@@ -50,7 +54,6 @@ function App() {
           <Route path="/exercise/b002" element={<B002 />} />
           <Route path="/exercise/c001" element={<C001 />} />
           <Route path="/exercise/c002" element={<C002 />} />
-
         </Routes>
       </div>
     </Router>

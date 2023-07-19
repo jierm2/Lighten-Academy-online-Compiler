@@ -6,7 +6,7 @@ import { TypeAnimation } from 'react-type-animation';
 import { Container } from 'react-bootstrap';
 
 
-const Day2 = () => {
+const Day3 = () => {
   const pythonCode = `# ------------------------
   #boolean
   # True False
@@ -83,4 +83,4 @@ const Day2 = () => {
   );
 };
 
-export default Day2;
+export default Day3;

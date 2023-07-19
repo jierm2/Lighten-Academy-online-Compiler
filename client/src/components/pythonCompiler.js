@@ -13,18 +13,23 @@ import UndoIcon from '@mui/icons-material/Undo';
 import { Container, Grid } from '@mui/material';
 
 function PythonCompiler() {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState(localStorage.getItem('code') || '');
   const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
   const handleClear = () => {
     setIsLoading(false);
     setCode('');
     setOutput('');
+    localStorage.removeItem('code');
   };
+  
   let editorRef; // reference to the AceEditor component
 
   const handleCodeChange = (newCode) => {
     setCode(newCode);
+    localStorage.setItem('code', newCode);
+
   };
 
   const handleUndo = () => {
@@ -68,6 +73,7 @@ function PythonCompiler() {
       setIsLoading(false);
     }
   }, [code]);
+  
 
   useEffect(() => {
     const handleKeyDown = (event) => {
