@@ -45,8 +45,8 @@ function PythonCompiler() {
   const handleRunCode = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://pymeow.org/api/execute', {
-      // const response = await fetch('http://localhost:5000/execute', {
+      // const response = await fetch('https://pymeow.org/api/execute', {
+      const response = await fetch('http://localhost:5000/execute', {
 
         method: 'POST',
         headers: {
@@ -173,7 +173,7 @@ function PythonCompiler() {
               editorProps={{ $blockScrolling: Infinity }}
               ref={(instance) => {
                 editorRef = instance;
-              }} // get the reference to the AceEditor instance
+              }} 
             />
           </div>
         </Grid>

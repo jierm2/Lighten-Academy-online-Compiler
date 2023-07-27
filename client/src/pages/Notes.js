@@ -15,11 +15,7 @@ export default function ActionAreaCard() {
     { date: "07-07-2023", day: "Friday" },
     { date: "07-10-2023", day: "Monday" },
     { date: "07-12-2023", day: "Wednesday" },
-    // { date: "07-14-2023", day: "Friday" },
     { date: "07-17-2023", day: "Monday" }
-
-    // { date: "07-10-2023", day: "Monday" },
-    // add more classes as needed
   ];
 
   return (
@@ -31,13 +27,14 @@ export default function ActionAreaCard() {
             <Grid item xs={12} sm={6} md={3} key={index}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', padding: '8px' }}>
                 <CardActionArea component={RouterLink} to={`/notes/day${index + 1}`}>
-                  <LazyLoadImage 
-                    src="/day1.jpg" // replace with the path to your image
-                    alt="Python Class day"
-                    height="350px"
-                    effect="blur" // remove this line if you don't want the blur effect
-                    style={{ width: '100%', objectFit: 'cover' }}
-                  />
+                  <Box sx={{ width: '100%', paddingBottom: '3.25%', overflow: 'hidden', position: 'relative' }}>
+                    <LazyLoadImage 
+                      src="/day1.jpg" // replace with the path to your image
+                      alt="Python Class day"
+                      effect="blur" // remove this line if you don't want the blur effect
+                      style={{ width: '100%', height: '80%' }}
+                    />
+                  </Box>
                   <CardContent>
                     <Typography gutterBottom variant="subtitle1" component="div">
                       {`Python Class ${index + 1}`}

@@ -5,7 +5,6 @@ import NavBar from '../components/NavBar';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import { TypeAnimation } from 'react-type-animation';
 
 
 // exercises.js
@@ -27,13 +26,6 @@ const exercisesB = [
   // { id: 'a002', title: 'One sample math question?', description: 'Use python as a calculator', type: 'A', imageUrl: 'https://cdn.pixabay.com/photo/2018/11/02/01/48/chalk-3789462_1280.jpg' },
   // { id: 'a003', title: 'The Most Beautiful Equation in Math', description: 'CS is a subfield of mathematics', type: 'A', imageUrl: 'https://cdn.pixabay.com/photo/2019/09/25/10/29/color-4503279_1280.jpg' },
   // { id: 'a004', title: 'Variables in Python practice 1', description: 'CS is a subfield of mathematics', type: 'A', imageUrl: 'https://files.realpython.com/media/Variables-in-Python_Watermarked.3868fbf92e1d.jpg' },
-];
-
-const exercisesC = [
-  { id: 'c001', title: "How are you!", description: 'Python does not require explicit declaration of variable types before their usage!', type: 'C', imageUrl: 'https://img.freepik.com/free-vector/cartoon-style-nerd-character-design_52683-81718.jpg?w=1060&t=st=1688407628~exp=1688408228~hmac=5dd55fcf5ec31a6747618eedfa746fb667ea47b1cee9e9e409cb33151aeb37f5' },
-  { id: 'c002', title: 'Police department asks you for help!', description: 'One more practice', type: 'C', imageUrl: 'https://img.freepik.com/free-vector/cartoon-style-nerd-character-design_52683-81717.jpg?w=1060&t=st=1688408352~exp=1688408952~hmac=74ad9fc9ae0906ee365462d9452a964ed52d4044e75898f022022affd43c47a0' },
-  // { id: 'a002', title: 'One sample math question?', description: 'Use python as a calculator', type: 'A', imageUrl: 'https://cdn.pixabay.com/photo/2018/11/02/01/48/chalk-3789462_1280.jpg' },
-  // { id: 'a003', title: 'The Most Beautiful Equation in Math', description: 'CS is a subfield of mathematics', type: 'A', imageUrl: 'https://cdn.pixabay.com/photo/2019/09/25/10/29/color-4503279_1280.jpg' },
 ];
 
 
@@ -68,16 +60,7 @@ function Exercise() {
       {/* Navigation bar */}
       <NavBar />
       <div className="container mt-4">
-        <h1><TypeAnimation
-                sequence={[
-                  // Same substring at the start will only be typed out once, initially
-                  'Hello, world!',
-                  1000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              /></h1>
+        <h1>Hello, World!</h1>
         <Row xs={1} md={3} className="g-4">
           {exercisesA.map((exercise, index) => (
             <Col key={exercise.id}>
@@ -97,16 +80,7 @@ function Exercise() {
         </Row>
       </div>
       <div className="container mt-4">
-        <h1><TypeAnimation
-                sequence={[
-                  // Same substring at the start will only be typed out once, initially
-                  'Variables and Types!',
-                  1000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              /></h1>
+        <h1>Variables and Types</h1>
         <Row xs={1} md={3} className="g-4">
           {exercisesB.map((exercise, index) => (
             <Col key={exercise.id}>
@@ -125,26 +99,11 @@ function Exercise() {
           ))}
         </Row>
       </div>
-      {/* <div className="container mt-4">
-        <h1>Operators</h1>
-        <Row xs={1} md={3} className="g-4">
-          {exercisesC.map((exercise, index) => (
-            <Col key={exercise.id}>
-              <a href={`/${exercise.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Card>
-                  <Card.Img variant="top" src={exercise.imageUrl} />
-                  <Card.Body>
-                    <Card.Title>{exercise.title}</Card.Title>
-                    <Card.Text>
-                      {exercise.description}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </a>
-            </Col>
-          ))}
-        </Row>
-      </div> */}
+      <div>
+      {/* ... */}
+      {/* <button onClick={addAllExercisesToFirebase}>Add Exercises to Firebase</button> */}
+      {/* ... */}
+    </div>
     </div>
   );
 }

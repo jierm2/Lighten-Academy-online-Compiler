@@ -23,8 +23,6 @@ import A002 from './pages/excercise/a/a002';
 import A003 from './pages/excercise/a/a003';
 import B001 from './pages/excercise/b/b001';
 import B002 from './pages/excercise/b/b002';
-import C001 from './pages/excercise/c/c001';
-import C002 from './pages/excercise/c/c002';
 import AuthWrapper from './context/AuthWrapper';
 
 function App() {
@@ -47,13 +45,11 @@ function App() {
           <Route path="/signup" element={<AuthWrapper nonAuthenticated={true}><Signup /></AuthWrapper>} />
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/account" element={<AuthWrapper><Account /></AuthWrapper>} />
-          <Route path="/exercise/a001" element={<A001 />} />
-          <Route path="/exercise/a002" element={<A002 />} />
-          <Route path="/exercise/a003" element={<A003 />} />
-          <Route path="/exercise/b001" element={<B001 />} />
-          <Route path="/exercise/b002" element={<B002 />} />
-          <Route path="/exercise/c001" element={<C001 />} />
-          <Route path="/exercise/c002" element={<C002 />} />
+          <Route path="/a001" element={<A001 />} />
+          <Route path="/a002" element={<A002 />} />
+          <Route path="/a003" element={<A003 />} />
+          <Route path="/b001" element={<B001 />} />
+          <Route path="/b002" element={<B002 />} />
         </Routes>
       </div>
     </Router>
